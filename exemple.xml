@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<persons>
+    <person>
+        <name>Коля</name>
+        <patronymic>Андреевич</patronymic>
+        <surname>Глан</surname>
+        <position>developer</position>
+        <type_salary>hour</type_salary>
+        <price>10</price>
+        <birth_at>21.12.2012</birth_at>
+        <department_id>1</department_id>
+    </person>
+</persons>
