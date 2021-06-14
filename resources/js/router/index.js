@@ -12,11 +12,11 @@ const routes = [
     },
     {
         name: 'department',
-        path: '/department/:id',
+        path: '/department/:id(\\d+)',
         component: () => import('../view/Department')
     },
     {
-        name: 'department',
+        name: 'abort',
         path: '/*',
         component: () => import('../view/Abort')
     },

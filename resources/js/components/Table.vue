@@ -1,6 +1,12 @@
 <template>
-    <div  class="">
-        <h1>table</h1>
+    <div class="col-8" :key="i">
+        <label for="count">Количестов элементов в списке</label>
+        <select name="count" id="count" v-model="count" @change="$emit('count-change',count)">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
         <table class="table">
             <thead>
             <tr>
@@ -34,24 +40,24 @@
                   :prev-text=" 'Предыдущая' "
                   :next-text=" 'Далее' "
                   :container-class="'pagination'"
-                  :active-class = "'active'"
-                  :page-class = "'links'"
-                  :disabled-classs = "'hide'"
+                  :active-class="'active'"
+                  :page-class="'links'"
         />
     </div>
 </template>
 
 <script>
-
     export default {
         name: "tabl",
         data() {
             return {
                 page: +this.$route.query.page || 1,
                 pageSize: 5,
-                data: false
+                i: 0,
+                count: false
             }
         },
+        props: ['data'],
         computed: {
             employes() {
                 return this.data.data
@@ -60,39 +66,27 @@
         methods: {
             pageChenge(page) {
                 this.$router.push(`${this.$route.path}?page=${page}`)
-                this.loadContent()
+                this.$emit('page-cheng')
             },
-            async loadContent() {
-                let page = this.page
-                let response = await fetch(`http://alvariumsoft/api/employes?page=${page}`, {method: 'GET'});
-                if (response.ok) {
-                    this.data = await response.json();
-                } else {
-                    alert('Some error')
-                }
-            },
-        },
-        async mounted() {
-            await this.loadContent()
-
         }
     }
 </script>
 
 <style>
-    .links > a{
+    .links > a {
         margin: 10px;
     }
 
-    .active{
+    .active {
         border: 2px solid red;
     }
-    .hide{
+
+    .table {
+
+        margin: 20px !important;
+    }
+
+    .disabled {
         display: none;
     }
-    .table{
-        width: 60%  ;
-    }
-
-
 </style>

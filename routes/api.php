@@ -19,4 +19,6 @@ Route::group([
 ], function ($router) {
     Route::get('/employes/{department?} ',  [App\Http\Controllers\EmployeController::class, 'get'])->where(['id'=>'[0-9]+']);
     Route::get('/departments',  [App\Http\Controllers\DepartmentController::class, 'get']);
+
+    Route::post('xml', [App\Http\Controllers\EmployeController::class, 'AddData']);
 });

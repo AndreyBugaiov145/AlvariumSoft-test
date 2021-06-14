@@ -6,6 +6,6 @@
 
 <script>
     export default {
-        name: "department"
+        name: "abort"
     }
 </script>

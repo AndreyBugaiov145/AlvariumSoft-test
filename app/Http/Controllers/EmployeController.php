@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\EmployeCollection;
 use App\Models\Employe;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EmployeController extends Controller
@@ -19,5 +18,22 @@ class EmployeController extends Controller
         }
 
         return new EmployeCollection($employee);
+    }
+
+    public function AddData(Request $request)
+    {
+        $xml = $request->text;
+        $dataArray = simplexml_load_string($xml);
+
+        foreach ($dataArray as $data) {
+            $data->birth_at = strtotime($data->birth_at);
+            try {
+                Employe::create((array)$data);
+            } catch (\Exception $e) {
+                return response()->json($e);
+            }
+        }
+
+        return response()->json('good');
     }
 }
